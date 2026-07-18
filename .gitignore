@@ -1,0 +1,36 @@
+# ---- Node / Frontend ----
+node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+npm-debug.log*
+yarn-error.log*
+.env
+.env.local
+.env.*.local
+
+# ---- Go / Backend ----
+backend/backend-api
+backend/*.exe
+backend/*.test
+backend/coverage.out
+vendor/
+
+# ---- Docker ----
+*.tar
+
+# ---- Kubernetes secrets (never commit real values) ----
+k8s/*secret*.yaml
+!k8s/deployment.yaml
+!k8s/service.yaml
+!k8s/ingress.yaml
+
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ---- Misc local output ----
+*.log
