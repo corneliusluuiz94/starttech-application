@@ -111,10 +111,15 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	if status != "ok" {
-		w.WriteHeader(http.StatusServiceUnavailable)
-	}
-	json.NewEncoder(w).Encode(healthResponse{Status: status, Checks: checks})
+
+	// Always return HTTP 200 so Kubernetes knows the application is running.
+	// The JSON response still indicates whether dependencies are degraded.
+	w.WriteHeader(http.StatusOK)
+
+	json.NewEncoder(w).Encode(healthResponse{
+		Status: status,
+		Checks: checks,
+	})
 
 	logJSON("info", "health check served, status="+status)
 	_ = log.Ldate
